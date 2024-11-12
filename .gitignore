@@ -1,4 +1,8 @@
+# venvs
+/.venv/*
+
+# data
+*.csv
+
+# other
 .DS_Store
-data/gdelt-2024-09-30-000000000000.csv
-data/gdelt-2024-09-30-000000000001.csv
-data/gdelt-2024-09-30-000000000002.csv
