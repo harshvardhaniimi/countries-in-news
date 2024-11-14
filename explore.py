@@ -15,10 +15,10 @@ ser = props2ser
 props = ser.array.to_numpy()
 cum_sum = props.cumsum()
 plt.plot(cum_sum)
-plt.show()
+# plt.show()
 
 # get number of times certain actor1-actor2 pairs occur (top level is actor1)
-num_keys = 10
+num_keys = 15
 num_rows = 10000
 keys = list(props1ser.head(num_keys).keys())
 keys.extend(list(props2ser.head(num_keys).keys()))
@@ -29,3 +29,8 @@ for index, row in df.head(num_rows).iterrows():
     mentions[row['Actor1CountryCode']][row['Actor2CountryCode']] += 1
 for k in keys:
   print(k, mentions[k])
+
+popularity = [(k, sum(list(mentions[k].values()))) for k in keys]
+popularity.sort(key=lambda x: x[1], reverse=True)
+print(popularity)
+print(list(map(lambda x: x[0], popularity)), len(popularity))
