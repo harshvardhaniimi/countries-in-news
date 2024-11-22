@@ -1,7 +1,7 @@
 -- LINK: https://console.cloud.google.com/bigquery?ws=!1m7!1m6!12m5!1m3!1sgdelt-437214!2sus-central1!3s7673c423-17ef-4f27-9689-b98031a0f5e1!2e1
 
 EXPORT DATA OPTIONS(
-  uri = 'gs://gdelt1/gdelt-2024-11-07-*.csv',
+  uri = 'gs://gdelt1/gdelt-2024-11-20-*.csv',
   format = 'CSV',
   overwrite = True,
   header = True,
@@ -24,11 +24,11 @@ WHERE
   AND Actor2CountryCode IN ('USA', 'IRN', 'IRQ', 'GBR', 'CHN', 'JPN', 'AUS', 'RUS', 'CAN', 'FRA', 'IND', 'UKR', 'NGA', 'PAK', 'TUR', 'ISR')
   
   -- Filter by date
-  AND SQLDATE >= 20190101
-  AND SQLDATE <= 20191231
+  AND SQLDATE >= 20130401
+  AND SQLDATE <= 20241120
   
-  -- Select a random 10% of the filtered data
-  AND RAND() < 0.1
+  -- Select a random 2.5% of the filtered data
+  AND RAND() < 0.025
   
   -- Filter events from specified reputable news sources
   -- AND (
