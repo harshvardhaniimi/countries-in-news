@@ -4,7 +4,7 @@ import matplotlib
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
 
-df = pd.read_csv('data/gdelt-2024-11-20-000000000000.csv')[['Actor1CountryCode', 'Actor2CountryCode', 'AvgTone']]
+df = pd.read_csv('data/gdelt-2024-11-20-000000000000.csv')[['SQLDATE', 'Actor1CountryCode', 'Actor2CountryCode', 'AvgTone']]
 
 actors = np.unique(np.concatenate((df['Actor1CountryCode'].unique(), df['Actor2CountryCode'].unique())))
 
@@ -19,6 +19,13 @@ avg_tones_all = np.sum(tones, axis=0) + np.sum(tones, axis=1)
 for i in range(len(avg_tones_all)):
   avg_tones_all[i] -= tones[i][i]
 avg_tones_all / len(avg_tones_all)
+
+df['Month'] = int(df['SQLDATE'].str.slice(4, 6))
+df['Day'] = int(df['SQLDATE'].str.slice(6, 8))
+mtones = np.array()
+for m in range(1, 13):
+  for d in range(1, 32):
+    pass
   
 # matrix of average tone for each relationship
 tick_labels = np.insert(actors, 0, '')
@@ -50,3 +57,5 @@ ax.set_xticks(num)
 ax.set_xticklabels(actors)
 ax.legend(loc='lower right')
 plt.show()
+
+# plot of average tone over time of news a country is involved in
