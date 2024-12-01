@@ -20,12 +20,17 @@ for i in range(len(avg_tones_all)):
   avg_tones_all[i] -= tones[i][i]
 avg_tones_all / len(avg_tones_all)
 
-df['Month'] = int(df['SQLDATE'].str.slice(4, 6))
-df['Day'] = int(df['SQLDATE'].str.slice(6, 8))
-mtones = np.array()
-for m in range(1, 13):
-  for d in range(1, 32):
-    pass
+# average tone over time
+df['DateTime'] = pd.to_datetime(df['SQLDATE'].astype(str), format='%Y%m%d')
+time_tones = np.array([])
+dates = np.array([])
+year_min = df['DateTime'].dt.year.min()
+year_max = df['DateTime'].dt.year.max()
+for y in range(year_min, year_max + 1):
+  for m in range(1, 13):
+      found = df.loc[(df['DateTime'].dt.year == y) & (df['DateTime'].dt.month == m)]
+      time_tones = np.append(time_tones, found['AvgTone'].mean())
+      dates = np.append(dates, f"{y}-{m}")
   
 # matrix of average tone for each relationship
 tick_labels = np.insert(actors, 0, '')
@@ -59,3 +64,11 @@ ax.legend(loc='lower right')
 plt.show()
 
 # plot of average tone over time of news a country is involved in
+fig = plt.figure(figsize=(8,8))
+ax = fig.add_subplot()
+ax.plot(time_tones)
+ax.set_xticklabels(dates)
+ax.xaxis.set_major_locator(ticker.MultipleLocator(6))
+formatter = ax.xaxis.get_major_formatter()
+formatter.seq = formatter.seq[::6]
+plt.show()
