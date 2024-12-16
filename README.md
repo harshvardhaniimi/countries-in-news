@@ -18,6 +18,8 @@ The countries list might lengthen/shorten depending on how much effort it is.
 The data will be sourced from [GDELT Project](https://analysis.gdeltproject.org/) ("Global Database of Events, Language, and Tone") which provides a global database of news articles.
 They have a [Python API](https://github.com/alex9smith/gdelt-doc-api) as well as [Google BigQuery](https://cloudplatform.googleblog.com/2014/05/worlds-largest-event-dataset-now-publicly-available-in-google-bigquery.html) so we can directly download the data for free.
 
+Link to Github repo of submission: <https://github.com/fdac24/countries-in-news>
+
 ## Team Members
 
 1. Harshvardhan (Harsh)
